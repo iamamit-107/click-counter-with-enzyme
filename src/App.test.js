@@ -6,11 +6,32 @@ Enzyme.configure({
   adapter: new EnzymeAdapter(),
 });
 
-test("render without error", () => {});
+/**
+ *  Factory function to create a shallow wrapper to the app component
+ * @function setup
+ * @returns {ShallowWrapper}
+ */
+const setup = () => shallow(<App />);
 
-test("render increment button", () => {});
+const findByTestAttr = (wrapper, val) => wrapper.find(`[data-test='${val}']`);
 
-test("render counter display", () => {});
+test("render without error", () => {
+  const wrapper = setup();
+  const appComponent = findByTestAttr(wrapper, "component-app");
+  expect(appComponent.length).toBe(1);
+});
+
+test("render increment button", () => {
+  const wrapper = setup();
+  const buttonComponent = findByTestAttr(wrapper, "increment-button");
+  expect(buttonComponent.length).toBe(1);
+});
+
+test("render counter display", () => {
+  const wrapper = setup();
+  const dispalyComponent = findByTestAttr(wrapper, "counter-display");
+  expect(dispalyComponent.length).toBe(1);
+});
 
 test("counter display start at 0", () => {});
 
