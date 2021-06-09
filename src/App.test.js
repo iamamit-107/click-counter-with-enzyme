@@ -33,6 +33,22 @@ test("render counter display", () => {
   expect(dispalyComponent.length).toBe(1);
 });
 
-test("counter display start at 0", () => {});
+test("counter display start at 0", () => {
+  const wrapper = setup();
+  const count = findByTestAttr(wrapper, "count").text();
+  expect(count).toBe("0");
+});
 
-test("clicking button increment counter display", () => {});
+test("clicking button increment counter display", () => {
+  const wrapper = setup();
+
+  // find the button
+  const buttonComponent = findByTestAttr(wrapper, "increment-button");
+
+  // click the button
+  buttonComponent.simulate("click");
+
+  // find display and the incremented counter
+  const count = findByTestAttr(wrapper, "count").text();
+  expect(count).toBe("1");
+});
